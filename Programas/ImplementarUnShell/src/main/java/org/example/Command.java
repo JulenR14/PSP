@@ -1,6 +1,7 @@
 package org.example;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
@@ -30,7 +31,7 @@ public class Command {
         String linea = "";
         try {
             ProcessBuilder prepararProceso = new ProcessBuilder(this.comandos);
-            //prepararProceso.directory(new File("C:\\Users\\julen\\Documents\\GitHub\\PSP\\Programas\\LanzadorProcesos\\src\\Shell"));
+            prepararProceso.directory(new File("C:\\Users\\julen\\Documents\\GitHub\\PSP\\Programas\\ImplementarUnShell\\src\\Shell"));
             Process proceso = prepararProceso.start();
 
             BufferedReader bf = new BufferedReader(new InputStreamReader(proceso.getInputStream()));

@@ -34,7 +34,7 @@ public class Shell {
                 comandoUsuario = bf.readLine();
             }
         }catch (IOException e){
-            e.printStackTrace();
+            e.getMessage();
         }
     }
 }
