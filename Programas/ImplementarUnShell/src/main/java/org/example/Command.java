@@ -30,8 +30,7 @@ public class Command {
         String salida = "";
         String linea = "";
         try {
-            ProcessBuilder prepararProceso = new ProcessBuilder(this.comandos);
-            prepararProceso.directory(new File("C:\\Users\\julen\\Documents\\GitHub\\PSP\\Programas\\ImplementarUnShell\\src\\Shell"));
+            ProcessBuilder prepararProceso = new ProcessBuilder("/bin/bash", "-c", String.join(" ", comandos));
             Process proceso = prepararProceso.start();
 
             BufferedReader bf = new BufferedReader(new InputStreamReader(proceso.getInputStream()));
