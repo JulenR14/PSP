@@ -38,9 +38,11 @@ public class Command {
         String linea = "";
         try {
             //instanciamos un ProcessBuilder con la ruta donde se ejecutara el proceso, y le pasamos los comandos
-            //ProcessBuilder prepararProceso = new ProcessBuilder("/bin/bash", "-c", String.join(" ", comandos));
+            //ProcessBuilder para ejecutar en linux
+            ProcessBuilder prepararProceso = new ProcessBuilder("/bin/bash", "-c", String.join(" ", comandos));
 
-            ProcessBuilder prepararProceso = new ProcessBuilder("cmd.exe", "/c", String.join(" ", comandos));
+            //ProcessBuilder para ejecutar en windows
+            //ProcessBuilder prepararProceso = new ProcessBuilder("cmd.exe", "/c", String.join(" ", comandos));
 
             //inicializamos el proceso con el metodo .start()
             Process proceso = prepararProceso.start();
