@@ -7,7 +7,15 @@ import java.io.InputStreamReader;
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Shell {
+    /**
+     * Metodo main de la clase Shell.
+     * Este metodo se encargara de ejecutar el shell
+     * y de leer los comandos que se escriban por consola.
+     *
+     * @param args Command line arguments.
+     */
     public static void main(String[] args) {
+
 
         //instanciamos un BufferedReader para leer los comandos escritos por consola
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));

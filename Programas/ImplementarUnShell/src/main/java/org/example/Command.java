@@ -5,6 +5,11 @@ import java.io.File;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
+/**
+ * Clase Command.
+ * Esta clase se encargara de ejecutar los comandos que se le pasen por parametro.
+ * Tambien se encargara de almacenar la salida de los comandos en un fichero.
+ */
 public class Command {
     //Atributos
     String[] comandos;
@@ -31,7 +36,14 @@ public class Command {
         }
     }
 
-    //metodo con el que ejecutaremos los procesos
+    /**
+     * Metodo ejecutar.
+     * Este metodo se encargara de ejecutar el comando que se le pase por parametro
+     * mediante un ProcessBuilder.
+     * Tambien se encargara de almacenar la salida del comando en un fichero.
+     *
+     * @return String con la salida del comando.
+     */
     public String ejecutar(){
         //atributos
         String salida = "";
@@ -76,7 +88,12 @@ public class Command {
         return salida;
     }
 
-    //devuelve un string con toda la informacion
+    /**
+     * Metodo toString.
+     * Este metodo se encargara de devolver un string con la informacion del comando.
+     *
+     * @return String con la informacion del comando.
+     */
     @Override
     public String toString() {
 
