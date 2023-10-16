@@ -9,29 +9,46 @@ import java.io.InputStreamReader;
 public class Shell {
     public static void main(String[] args) {
 
+        //instanciamos un BufferedReader para leer los comandos escritos por consola
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         Command comando = null;
         Command ultimoComando = null;
+
         try{
+
             System.out.print("Escribe el comando que quieras (Si quieres almacenar la salida en un fichero\n" +
                     "escribe el comando y seguido > con el fichero donde almacenar la salida)\n" +
                     "Comando : ");
+            //leemos el comando
             String comandoUsuario = bf.readLine();
 
+            //comprobamos si el comando es exit para comprobar si quiere salir del shell
             while(!comandoUsuario.equals("exit")){
+                //comprobamos si quiere ejecutar el ultimo comando ejecutado
                 if (comandoUsuario.equals("last-command")){
+                    //en el caso de que el ultimo comando sea null mostraremos un mensaje de error
                     if (ultimoComando.equals(null)){
                         System.err.println("No hay ultimo comando...");
                     }else{
+                        //si no es nulo, llamamos al metodo que ejecutara el comando anterior
                         System.out.println(ultimoComando.ejecutar());
+                        ultimoComando.toString();
                     }
                 }else{
+                    //si no quiere el ultimo comando
+                    //instanciaremos en la variable comando el nuevo comando a ejecutar
                     comando = new Command(comandoUsuario);
+                    //llamaremos al metodo que ejecutara dicho comando
                     System.out.println(comando.ejecutar());
+                    //diermos que el ultimo comando es el comando que se acaba de ejecutar
                     ultimoComando = comando;
+                    comando.toString();
                 }
+                //pedimos el siguiente comando a ejecutar
                 System.out.print("Comando : ");
                 comandoUsuario = bf.readLine();
+
+
             }
         }catch (IOException e){
             e.getMessage();
