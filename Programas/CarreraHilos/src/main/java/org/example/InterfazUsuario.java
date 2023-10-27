@@ -13,43 +13,47 @@ public class InterfazUsuario {
         ArrayList<Corredor> listaCorredores = new ArrayList<>();
         String simbolo;
         int velocidadBase;
-        int valorTurbo;
+        int posibilidadTurbo;
         int probabilidadChocar;
         boolean comprobarValor = true;
 
-        System.out.println("Escribe la cantidad de corredores que quieres: ");
+        System.out.print("Escribe la cantidad de corredores que quieres: ");
 
         try {
             cantidadCorredores = bf.read();
 
             for (int i = 0; i < cantidadCorredores; i++) {
                 comprobarValor = true;
-                System.out.println("Escribe el simbolo del corredor " + (i + 1) + ": ");
+                System.out.print("Escribe el simbolo del corredor " + (i + 1) + ": ");
                 simbolo = bf.readLine();
-                System.out.println("Escribe la velocidad base del corredor " + (i + 1) + ": ");
+                System.out.print("Escribe la velocidad base del corredor " + (i + 1) + ": ");
                 velocidadBase = bf.read();
                 if(!valorCorrecto(velocidadBase)){
-                    System.out.println("El valor de la velocidad base no es correcto, debe ser menor o igual a 5");
+                    System.out.print("El valor de la velocidad base no es correcto, debe ser menor o igual a 5");
                     i--;
                     comprobarValor = false;
                 }
-                System.out.println("Escribe el valor turbo del corredor " + (i + 1) + ": ");
-                valorTurbo = bf.read();
-                if(!valorCorrecto(valorTurbo)){
-                    System.out.println("El valor de la velocidad turbo no es correcto, debe ser menor o igual a 5");
+                System.out.print("Escribe la posibilidad de turbo del corredor " + (i + 1) + ": ");
+                posibilidadTurbo = bf.read();
+                if(!valorCorrecto(posibilidadTurbo)){
+                    System.out.print("El valor de la posibilidad de turbo no es correcto, debe ser menor o igual a 5");
                     i--;
                     comprobarValor = false;
                 }
-                System.out.println("Escribe la probabilidad de chocar del corredor " + (i + 1) + ": ");
+                System.out.print("Escribe la probabilidad de chocar del corredor " + (i + 1) + ": ");
                 probabilidadChocar = bf.read();
                 if(!valorCorrecto(probabilidadChocar)){
                     System.out.println("El valor de la probabilidad de chocar no es correcto, debe ser menor o igual a 5");
                     i--;
                     comprobarValor = false;
                 }
-                Corredor corredor = new Corredor(simbolo, velocidadBase, valorTurbo, probabilidadChocar);
-                if(comprobarValor){
+
+                if(comprobarValor && (velocidadBase + posibilidadTurbo + probabilidadChocar) <= 10){
+                    Corredor corredor = new Corredor(simbolo, velocidadBase, posibilidadTurbo, probabilidadChocar);
                     listaCorredores.add(corredor);
+                }else{
+                    System.err.println("La suma de los valores no puede ser mayor a 10");
+                    i--;
                 }
             }
 
