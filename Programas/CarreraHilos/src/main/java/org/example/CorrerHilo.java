@@ -12,7 +12,7 @@ public class CorrerHilo extends Thread{
     public void run(){
         while(this.corredor.avanzar(valorFinal)){
             try{
-                System.out.println(this.corredor.toString());
+                System.out.print(this.corredor.toString());
                 Thread.sleep(1000);
             }catch(InterruptedException e){
                 e.printStackTrace();

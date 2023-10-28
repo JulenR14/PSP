@@ -20,28 +20,28 @@ public class InterfazUsuario {
         System.out.print("Escribe la cantidad de corredores que quieres: ");
 
         try {
-            cantidadCorredores = bf.read();
+            cantidadCorredores = Integer.parseInt(bf.readLine());
 
             for (int i = 0; i < cantidadCorredores; i++) {
                 comprobarValor = true;
                 System.out.print("Escribe el simbolo del corredor " + (i + 1) + ": ");
                 simbolo = bf.readLine();
                 System.out.print("Escribe la velocidad base del corredor " + (i + 1) + ": ");
-                velocidadBase = bf.read();
+                velocidadBase = Integer.parseInt(bf.readLine());
                 if(!valorCorrecto(velocidadBase)){
                     System.out.print("El valor de la velocidad base no es correcto, debe ser menor o igual a 5");
                     i--;
                     comprobarValor = false;
                 }
                 System.out.print("Escribe la posibilidad de turbo del corredor " + (i + 1) + ": ");
-                posibilidadTurbo = bf.read();
+                posibilidadTurbo = Integer.parseInt(bf.readLine());
                 if(!valorCorrecto(posibilidadTurbo)){
                     System.out.print("El valor de la posibilidad de turbo no es correcto, debe ser menor o igual a 5");
                     i--;
                     comprobarValor = false;
                 }
                 System.out.print("Escribe la probabilidad de chocar del corredor " + (i + 1) + ": ");
-                probabilidadChocar = bf.read();
+                probabilidadChocar = Integer.parseInt(bf.readLine());
                 if(!valorCorrecto(probabilidadChocar)){
                     System.out.println("El valor de la probabilidad de chocar no es correcto, debe ser menor o igual a 5");
                     i--;

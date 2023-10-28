@@ -12,7 +12,9 @@ public class Main {
         ArrayList<Corredor> listaCorredores = new ArrayList<>();
 
         listaCorredores = InterfazUsuario.agregarCorredores();
+
         Carrera carrera = new Carrera(listaCorredores);
+
 
         carrera.empezarCarrera();
 

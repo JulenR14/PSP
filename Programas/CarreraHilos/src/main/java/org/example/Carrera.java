@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Carrera {
     private ArrayList<Corredor> listaCorredores;
-    private ArrayList<CorrerHilo> hilosCorredores;
+    private ArrayList<CorrerHilo> hilosCorredores = new ArrayList<>();
     private int valorFinal = 100;
 
     public Carrera(ArrayList<Corredor> listaCorredores){
