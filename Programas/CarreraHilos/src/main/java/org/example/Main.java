@@ -17,6 +17,7 @@ public class Main {
 
 
         carrera.empezarCarrera();
+        carrera.terminarCarrera();
 
     }
 }

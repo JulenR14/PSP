@@ -13,7 +13,7 @@ public class ChocarCorredor extends Thread{
     public void run(){
             try{
                 corredor.retroceder();
-                System.out.println(this.corredor.toString());
+                //System.out.println(this.corredor.toString());
                 Thread.sleep(1000);
             }catch(InterruptedException e){
                 e.printStackTrace();

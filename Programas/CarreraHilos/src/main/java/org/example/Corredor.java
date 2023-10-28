@@ -20,6 +20,46 @@ public class Corredor {
         this.posicion = 0;
     }
 
+    public String getSimbolo() {
+        return simbolo;
+    }
+
+    public void setSimbolo(String simbolo) {
+        this.simbolo = simbolo;
+    }
+
+    public int getVelocidadBase() {
+        return velocidadBase;
+    }
+
+    public void setVelocidadBase(int velocidadBase) {
+        this.velocidadBase = velocidadBase;
+    }
+
+    public int getPosibilidadTurbo() {
+        return posibilidadTurbo;
+    }
+
+    public void setPosibilidadTurbo(int posibilidadTurbo) {
+        this.posibilidadTurbo = posibilidadTurbo;
+    }
+
+    public int getProbabilidadChocar() {
+        return probabilidadChocar;
+    }
+
+    public void setProbabilidadChocar(int probabilidadChocar) {
+        this.probabilidadChocar = probabilidadChocar;
+    }
+
+    public int getPosicion() {
+        return posicion;
+    }
+
+    public void setPosicion(int posicion) {
+        this.posicion = posicion;
+    }
+
     public synchronized boolean avanzar(int valorFinal){
         if(this.posicion < valorFinal) {
             if ((int) (Math.random() * 10) < this.posibilidadTurbo) {
