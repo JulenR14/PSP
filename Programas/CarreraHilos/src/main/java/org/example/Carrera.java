@@ -1,63 +1,27 @@
 package org.example;
 
-import java.util.ArrayList;
+import lombok.Data;
 
+import java.util.ArrayList;
+@Data
 public class Carrera {
     private ArrayList<Corredor> listaCorredores;
-    private ArrayList<ChocarCorredor> hilosChocar = new ArrayList<>();
-
-    private ArrayList<CorrerHilo> hilosCorredores = new ArrayList<>();
-    private int valorFinal = 100;
-    private boolean terminarCarrera = false;
+    private ArrayList<ChocarCorredor> hilosChocar;
+    private ArrayList<CorrerHilo> hilosCorredores;
+    private PosicionesCorredores posicionesCorredores;
+    private VerCarrera verCarrera;
+    private static final int valorFinal = 50;
 
     public Carrera(ArrayList<Corredor> listaCorredores){
         this.listaCorredores = listaCorredores;
+        this.posicionesCorredores = new PosicionesCorredores();
+        this.hilosCorredores = new ArrayList<>();
+        this.hilosChocar = new ArrayList<>();
         for (Corredor corredor : listaCorredores){
-            this.hilosCorredores.add(new CorrerHilo(corredor, valorFinal));
+            this.hilosCorredores.add(new CorrerHilo(corredor, valorFinal, posicionesCorredores));
             this.hilosChocar.add(new ChocarCorredor(corredor, valorFinal));
         }
-    }
-
-    public Carrera(){}
-
-    public ArrayList<Corredor> getListaCorredores() {
-        return listaCorredores;
-    }
-
-    public void setListaCorredores(ArrayList<Corredor> listaCorredores) {
-        this.listaCorredores = listaCorredores;
-    }
-
-    public ArrayList<ChocarCorredor> getHilosChocar() {
-        return hilosChocar;
-    }
-
-    public void setHilosChocar(ArrayList<ChocarCorredor> hilosChocar) {
-        this.hilosChocar = hilosChocar;
-    }
-
-    public ArrayList<CorrerHilo> getHilosCorredores() {
-        return hilosCorredores;
-    }
-
-    public void setHilosCorredores(ArrayList<CorrerHilo> hilosCorredores) {
-        this.hilosCorredores = hilosCorredores;
-    }
-
-    public int getValorFinal() {
-        return valorFinal;
-    }
-
-    public void setValorFinal(int valorFinal) {
-        this.valorFinal = valorFinal;
-    }
-
-    public boolean getTerminarCarrera() {
-        return terminarCarrera;
-    }
-
-    public void setTerminarCarrera(boolean terminarCarrera) {
-        this.terminarCarrera = terminarCarrera;
+        this.verCarrera = new VerCarrera(this, posicionesCorredores);
     }
 
     public void empezarCarrera(){
@@ -67,6 +31,7 @@ public class Carrera {
         for(ChocarCorredor hilo : hilosChocar){
             hilo.start();
         }
+        verCarrera.start();
     }
 
     public void terminarCarrera(){
@@ -77,22 +42,24 @@ public class Carrera {
             for(ChocarCorredor hilo : hilosChocar){
                 hilo.join();
             }
+            verCarrera.join();
+
+            System.out.println("La carrera ha terminado");
+            for(int i = 0; i < posicionesCorredores.tamanoCorredores(); i++){
+                System.out.println("El corredor " + posicionesCorredores.getCorredor(i) + " ha quedado en la posicion " + (i+1));
+            }
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        this.terminarCarrera = true;
     }
 
-    public void showRace(){
-        StringBuilder sb = new StringBuilder();
-        System.out.println("\n".repeat(20));
-        System.out.println("-".repeat(this.valorFinal+3));
-        for (Corredor runner : this.listaCorredores) {
-            sb.setLength(0);
-            sb.append("|").append(" ".repeat(runner.getPosicion())).append(runner.getSimbolo());
-            sb.append(" ".repeat(this.valorFinal - runner.getPosicion())).append("|");
-            System.out.println(sb);
+    @Override
+    public String toString(){
+        String mostrar = "\r\n".repeat(10) + "*".repeat(52) + "\r\n";
+        for (Corredor runner: this.listaCorredores) {
+            mostrar += "*" + " ".repeat(runner.getPosicion()) + runner.getSimbolo() + " ".repeat(Math.max(valorFinal - runner.getPosicion()-1, 0)) + "*\r\n";
         }
-        System.out.println("-".repeat(this.valorFinal+3));
+        mostrar += "*".repeat(52) + "\r\n";
+        return mostrar;
     }
 }

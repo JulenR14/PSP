@@ -15,7 +15,6 @@ public class Main {
 
         Carrera carrera = new Carrera(listaCorredores);
 
-
         carrera.empezarCarrera();
         carrera.terminarCarrera();
 

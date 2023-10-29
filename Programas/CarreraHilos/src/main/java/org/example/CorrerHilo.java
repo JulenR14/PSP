@@ -1,22 +1,28 @@
 package org.example;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class CorrerHilo extends Thread{
     private Corredor corredor;
-    private Carrera carrera = new Carrera();
     private int valorFinal;
+    private PosicionesCorredores posicionesCorredores;
 
-    public CorrerHilo(Corredor corredor, int valorFinal){
-        this.corredor = corredor;
-        this.valorFinal = valorFinal;
-    }
 
     public void run(){
         while(this.corredor.avanzar(valorFinal)){
             try{
-                Thread.sleep(1000);
+                sleep(1000);
             }catch(InterruptedException e){
                 e.printStackTrace();
             }
         }
+        this.posicionesCorredores.agregar(this.corredor.getSimbolo());
     }
 }

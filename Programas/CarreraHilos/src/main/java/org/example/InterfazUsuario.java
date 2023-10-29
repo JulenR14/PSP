@@ -6,16 +6,18 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class InterfazUsuario {
-    private static BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+    private static BufferedReader bf;
+
 
     public static ArrayList<Corredor> agregarCorredores() {
+        bf = new BufferedReader(new InputStreamReader(System.in));
         int cantidadCorredores;
         ArrayList<Corredor> listaCorredores = new ArrayList<>();
         String simbolo;
         int velocidadBase;
         int posibilidadTurbo;
         int probabilidadChocar;
-        boolean comprobarValor = true;
+        boolean comprobarValor;
 
         System.out.print("Escribe la cantidad de corredores que quieres: ");
 
@@ -29,9 +31,10 @@ public class InterfazUsuario {
                 System.out.print("Escribe la velocidad base del corredor " + (i + 1) + ": ");
                 velocidadBase = Integer.parseInt(bf.readLine());
                 if(!valorCorrecto(velocidadBase)){
-                    System.out.print("El valor de la velocidad base no es correcto, debe ser menor o igual a 5");
+                    System.out.println("El valor de la velocidad base no es correcto, debe ser menor o igual a 5");
                     i--;
                     comprobarValor = false;
+                    continue;
                 }
                 System.out.print("Escribe la posibilidad de turbo del corredor " + (i + 1) + ": ");
                 posibilidadTurbo = Integer.parseInt(bf.readLine());
@@ -39,6 +42,7 @@ public class InterfazUsuario {
                     System.out.print("El valor de la posibilidad de turbo no es correcto, debe ser menor o igual a 5");
                     i--;
                     comprobarValor = false;
+                    continue;
                 }
                 System.out.print("Escribe la probabilidad de chocar del corredor " + (i + 1) + ": ");
                 probabilidadChocar = Integer.parseInt(bf.readLine());
@@ -46,6 +50,7 @@ public class InterfazUsuario {
                     System.out.println("El valor de la probabilidad de chocar no es correcto, debe ser menor o igual a 5");
                     i--;
                     comprobarValor = false;
+                    continue;
                 }
 
                 if(comprobarValor && (velocidadBase + posibilidadTurbo + probabilidadChocar) <= 10){
@@ -66,7 +71,7 @@ public class InterfazUsuario {
 
     private static boolean valorCorrecto(int valor){
         boolean correcto = false;
-        if(valor <= 5){
+        if(valor <= 5 && valor > 0){
             correcto = true;
         }
         return correcto;
