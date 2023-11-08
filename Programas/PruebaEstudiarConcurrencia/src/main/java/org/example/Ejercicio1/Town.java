@@ -1,4 +1,4 @@
-package org.example;
+package org.example.Ejercicio1;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,11 +19,17 @@ public class Town {
     public synchronized int trabajar(){
         int posicionParque = 0;
         do{
-            posicionParque = (int) Math.random()*parques.length;
+            posicionParque = (int) (Math.random() * parques.length);
         }while (parques[posicionParque]);
 
         this.parques[posicionParque] = true;
-        System.out.println("El jardinero " + Thread.currentThread().getName() + " esta trabajando en el parque " + posicionParque);
+        System.out.println("The garden " + Thread.currentThread().getName() + " is working on the park " + posicionParque);
         return posicionParque;
+    }
+
+    public synchronized boolean dejarParque(int posicion){
+        parques[posicion] = false;
+        System.out.println("Garden " + Thread.currentThread().getName() + " is done with the park " + posicion);
+        return !parques[posicion];
     }
 }
