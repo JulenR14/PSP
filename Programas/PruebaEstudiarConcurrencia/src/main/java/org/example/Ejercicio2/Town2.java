@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class Town2 {
-    Park[] parques;
+    private Park[] parques;
 
     public Town2(int cantidadParques){
         parques = new Park[cantidadParques];
