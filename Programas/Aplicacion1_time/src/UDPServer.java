@@ -1,5 +1,7 @@
 import java.net.*;
 import java.io.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class UDPServer {
 
@@ -17,12 +19,17 @@ public class UDPServer {
                 // Leemos una petición del DatagramSocket
                 socketUDP.receive(receivedDatagram);
 
-                System.out.println("El mensaje es: " + new String(receivedDatagram.getData()));
+                String hora = "";
+                if ("time".equals(new String(receivedDatagram.getData()).substring(0, 4))){
+                    hora = String.format("%02d:%02d", LocalDateTime.now().getHour(), LocalDateTime.now().getMinute());
+                }
+                System.out.println("El mensaje es: " + new String(receivedDatagram.getData()).substring(0, 4));
                 System.out.print("Datagrama recibido del host: " + receivedDatagram.getAddress());
                 System.out.println(" desde el puerto remoto: " + receivedDatagram.getPort());
 
+
                 // Construimos el DatagramPacket para enviar la respuesta
-                DatagramPacket responseDatagram = new DatagramPacket(receivedDatagram.getData(), receivedDatagram.getLength(), receivedDatagram.getAddress(), receivedDatagram.getPort());
+                DatagramPacket responseDatagram = new DatagramPacket(hora.getBytes(), hora.length(), receivedDatagram.getAddress(), receivedDatagram.getPort());
 
                 // Enviamos la respuesta, que es un eco
                 socketUDP.send(responseDatagram);

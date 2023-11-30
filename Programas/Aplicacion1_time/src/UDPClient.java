@@ -6,7 +6,7 @@ public class UDPClient {
 
         try {
             DatagramSocket socket = new DatagramSocket();
-            byte[] mensaje = "Hola".getBytes();
+            byte[] mensaje = "time".getBytes();
             InetAddress serverHost = InetAddress.getByName("localhost");
             int serverPort = 6789;
 
@@ -18,7 +18,7 @@ public class UDPClient {
             DatagramPacket respuestaDatagram = new DatagramPacket(respuesta, respuesta.length);
             socket.receive(respuestaDatagram);
 
-            System.out.println("La respuesta del servidor es: " + new String(respuestaDatagram.getData()));
+            System.out.println("La hora que envia el servidor es : " + new String(respuestaDatagram.getData()).substring(0, 5));
 
             socket.close();
 
