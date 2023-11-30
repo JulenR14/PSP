@@ -2,6 +2,7 @@ package org.example;
 
 import java.io.*;
 import java.net.*;
+import java.util.Base64;
 
 public class TCPServer {
     public static final int PORT = 4444;
@@ -32,8 +33,9 @@ public class TCPServer {
             output = new PrintWriter(new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream())),true);
 
             String s = input.readLine();
-            System.out.println("Cliente: " + s);
-            output.println("Hola cliente!");
+            String mensajeBase64 = Base64.getEncoder().encodeToString(s.getBytes());
+            System.out.println("Texto del cliente a encriptar : " + s);
+            output.println("#" + mensajeBase64 + "#");
         } catch (IOException e) {
             System.out.println("IOException: " + e.getMessage());
         }
