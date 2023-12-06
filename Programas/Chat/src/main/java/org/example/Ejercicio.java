@@ -9,13 +9,19 @@ public class Ejercicio {
         while(true) {
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             System.out.println("Elige una opción: ");
-            System.out.println("1. Suscribirse a un topic");
+            System.out.println("1. Ver el chat");
             System.out.println("2. Publicar un mensaje");
             System.out.println("3. Salir");
             int opcion = Integer.parseInt(br.readLine());
             switch (opcion) {
                 case 1:
-                    MQTTSuscribe.main(args);
+                    System.out.println("Escribe que chat quieres leer:");
+                    System.out.println("- /chat/todos/");
+                    System.out.println("- /chat/alejandro/julen");
+                    System.out.println("- /chat/julen/alejandro");
+                    System.out.print("Escribe aquí: ");
+                    String chat = br.readLine();
+                    MQTTSuscribe.leerchat(chat);
                     break;
                 case 2:
                     MQTTPublish.main(args);
