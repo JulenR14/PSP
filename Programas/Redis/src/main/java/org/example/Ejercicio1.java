@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
+import java.util.Scanner;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -20,13 +21,14 @@ public class Ejercicio1 {
 
 
         //pedimos el comando al usuario
-        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+        //BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+        Scanner sc = new Scanner(System.in);
         System.out.println("Escribe el comando que quieras :\n" +
                 "- shorten URL : URL es la url a acortar\n" +
                 "- url SHORTEDURL : SHORTEDURL es la url acortada\n" +
                 "- exit : Salir del programa");
         System.out.print("Escribe el comando que quieras :");
-        String comando = bf.readLine();
+        String comando = sc.nextLine();
 
         Thread acortador = new Thread(new Ejercicio2());
 
@@ -70,8 +72,9 @@ public class Ejercicio1 {
                     System.out.println("Comando no valido");
                 }
                 System.out.print("Escribe el comando que quieras :");
-                comando = bf.readLine();
+                comando = sc.nextLine();
             }
+            System.out.println("Saliendo del programa");
             acortador.join();
         }catch (Exception e){
             System.out.println("Error al conectar con la base de datos");

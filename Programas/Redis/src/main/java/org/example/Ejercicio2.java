@@ -5,13 +5,14 @@ import redis.clients.jedis.Jedis;
 public class Ejercicio2 implements Runnable {
     @Override
     public void run() {
+        boolean salir = false;
         String clave_URLTOSHORT = "JULEN:URLS_TO_SHORT";
         String clave_SHORTEDURL = "JULEN:SHORTED_URLS";
 
-        try(Jedis jedis = new Jedis("34.228.162.124", 6379);){
+        try(Jedis jedis = new Jedis("34.228.162.124", 6379)){
             while(true){
                 //eliminamos la ultima url de la lista y la acortamos metiendola en el hash
-                String url = jedis.rpop(clave_URLTOSHORT);
+                String url = jedis.lpop(clave_URLTOSHORT);
                 if(url != null){
                     String[] separados = url.split("/");
                     String shortedUrl = "";
@@ -19,10 +20,10 @@ public class Ejercicio2 implements Runnable {
                         shortedUrl += separados[i] + "/";
                     }
                     jedis.hset(clave_SHORTEDURL, shortedUrl, url);
-                    System.out.println("La url acortada es : " + shortedUrl);
                 }
-
             }
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 }
