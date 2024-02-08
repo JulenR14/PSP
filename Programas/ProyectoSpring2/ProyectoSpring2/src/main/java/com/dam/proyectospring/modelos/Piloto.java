@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document("pilotos")
+@Document("pilots")
 public class Piloto implements Serializable {
     @Id
     private String id;

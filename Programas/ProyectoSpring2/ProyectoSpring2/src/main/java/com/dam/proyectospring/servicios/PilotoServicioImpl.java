@@ -9,12 +9,31 @@ import java.util.List;
 
 @Service
 public class PilotoServicioImpl implements PilotoServicio {
-    @Autowired
-    private PilotoRepositorio pilotoRepositorio;
+    private final PilotoRepositorio pilotoRepositorio;
 
+    @Autowired
+    public PilotoServicioImpl(PilotoRepositorio pilotoRepositorio) {
+        this.pilotoRepositorio = pilotoRepositorio;
+    }
 
     @Override
     public List<Piloto> findAllPilotos() {
         return pilotoRepositorio.findAll();
     }
+
+    @Override
+    public Piloto findById(Long id) {
+        return pilotoRepositorio.findById(id);
+    }
+
+    @Override
+    public void savePiloto(Piloto piloto) {
+        pilotoRepositorio.save(piloto);
+    }
+
+    @Override
+    public void deletePiloto(Long id) {
+        pilotoRepositorio.deleteById(id);
+    }
+
 }

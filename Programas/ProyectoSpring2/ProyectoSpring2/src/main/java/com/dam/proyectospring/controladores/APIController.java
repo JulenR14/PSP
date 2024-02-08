@@ -12,8 +12,11 @@ import java.util.List;
 
 @Controller
 public class APIController {
+    private final PilotoServicio pilotoServicio;
     @Autowired
-    private PilotoServicio pilotoServicio;
+    public APIController(PilotoServicio pilotoServicio) {
+        this.pilotoServicio = pilotoServicio;
+    }
 
     // GET de todos los pilotos, devuelve un JSON con todos los pilotos
     @GetMapping(value = "/api/pilotos")
@@ -26,24 +29,26 @@ public class APIController {
     // GET de un piloto, devuelve un JSON del piloto
     @GetMapping("/piloto/{id}")
     public ResponseEntity<Piloto> getProduct(@PathVariable long id) {
-        Piloto piloto;
-        // TODO buscar el piloto con identificador id
+        Piloto piloto = pilotoServicio.findById(id);
         return new ResponseEntity<>(piloto, HttpStatus.OK);
     }
 
     // POST de un piloto, crea un piloto
     @PostMapping("/pilotos")
     public ResponseEntity<Piloto> addProduct(@RequestBody Piloto piloto) {
-        Piloto nuevoPiloto;
+        if (piloto.getId() != null) {
+            return ResponseEntity.badRequest().build();
+        }
+        this.pilotoServicio.savePiloto(piloto);
         // TODO Crear un nuevo pilot en la BB.DD. La información del nuevo piloto se encuentra en el objeto piloto
         // Para que llegue esta información en RESTED tenéis que poner en el body un JSON con la información del piloto a crear
-        return new ResponseEntity<>(nuevoPiloto, HttpStatus.OK);
+        return new ResponseEntity<>(piloto, HttpStatus.OK);
     }
 
     // PUT de un piloto, actualiza un piloto
     @PutMapping("/pilotos/{id}")
     public ResponseEntity<Piloto> modifyProduct(@PathVariable long id, @RequestBody Piloto piloto) {
-        Piloto piloto;
+        this.pilotoServicio.savePiloto(piloto);
         // TODO Actualizar un nuevo pilot en la BB.DD. La información del nuevo piloto se encuentra en el objeto piloto
         // Para que llegue esta información en RESTED tenéis que poner en el body un JSON con la información del piloto a crear
 
@@ -53,6 +58,7 @@ public class APIController {
     @DeleteMapping("/products/{id}")
     public ResponseEntity<Response> deleteProduct(@PathVariable long id) {
         // TODO Borrar un producto
+        this.pilotoServicio.deletePiloto(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
