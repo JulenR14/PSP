@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PilotoServicioImpl implements PilotoServicio {
@@ -22,13 +23,13 @@ public class PilotoServicioImpl implements PilotoServicio {
     }
 
     @Override
-    public Piloto findById(Long id) {
-        return pilotoRepositorio.findById(id);
+    public Optional<Piloto> findById(Long id) {
+        return pilotoRepositorio.findById(String.valueOf(id));
     }
 
     @Override
-    public void savePiloto(Piloto piloto) {
-        pilotoRepositorio.save(piloto);
+    public Piloto savePiloto(Piloto piloto) {
+        return pilotoRepositorio.save(piloto);
     }
 
     @Override

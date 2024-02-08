@@ -3,13 +3,14 @@ package com.dam.proyectospring.servicios;
 import com.dam.proyectospring.modelos.Piloto;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PilotoServicio {
     List<Piloto> findAllPilotos();
 
-    Piloto findById(Long id);
+    Optional<Piloto> findById(Long id);
 
-    void savePiloto(Piloto piloto);
+    Piloto savePiloto(Piloto piloto);
 
     void deletePiloto(Long id);
 }

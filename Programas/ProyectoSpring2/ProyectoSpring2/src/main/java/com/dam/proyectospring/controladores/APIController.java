@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class APIController {
@@ -29,8 +30,8 @@ public class APIController {
     // GET de un piloto, devuelve un JSON del piloto
     @GetMapping("/piloto/{id}")
     public ResponseEntity<Piloto> getProduct(@PathVariable long id) {
-        Piloto piloto = pilotoServicio.findById(id);
-        return new ResponseEntity<>(piloto, HttpStatus.OK);
+        Optional<Piloto> piloto = pilotoServicio.findById(id);
+        return new ResponseEntity<>(piloto.get(), HttpStatus.OK);
     }
 
     // POST de un piloto, crea un piloto
@@ -55,7 +56,7 @@ public class APIController {
         return new ResponseEntity<>(piloto, HttpStatus.OK);
     }
 
-    @DeleteMapping("/products/{id}")
+    @DeleteMapping("/pilotos/{id}")
     public ResponseEntity<Response> deleteProduct(@PathVariable long id) {
         // TODO Borrar un producto
         this.pilotoServicio.deletePiloto(id);
