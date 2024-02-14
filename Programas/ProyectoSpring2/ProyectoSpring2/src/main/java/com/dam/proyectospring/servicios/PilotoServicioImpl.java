@@ -23,7 +23,7 @@ public class PilotoServicioImpl implements PilotoServicio {
     }
 
     @Override
-    public Optional<Piloto> findById(Long id) {
+    public Optional<Piloto> findById(String id) {
         return pilotoRepositorio.findById(String.valueOf(id));
     }
 
@@ -33,7 +33,7 @@ public class PilotoServicioImpl implements PilotoServicio {
     }
 
     @Override
-    public void deletePiloto(Long id) {
+    public void deletePiloto(String id) {
         pilotoRepositorio.deleteById(id);
     }
 

@@ -8,9 +8,9 @@ import java.util.Optional;
 public interface PilotoServicio {
     List<Piloto> findAllPilotos();
 
-    Optional<Piloto> findById(Long id);
+    Optional<Piloto> findById(String id);
 
     Piloto savePiloto(Piloto piloto);
 
-    void deletePiloto(Long id);
+    void deletePiloto(String id);
 }

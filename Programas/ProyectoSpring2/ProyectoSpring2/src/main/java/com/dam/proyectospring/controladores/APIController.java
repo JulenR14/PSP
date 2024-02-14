@@ -20,7 +20,7 @@ public class APIController {
     }
 
     // GET de todos los pilotos, devuelve un JSON con todos los pilotos
-    @GetMapping(value = "/api/pilotos")
+    @GetMapping(value = "/pilotos")
     public ResponseEntity<List<Piloto>> getProduct()
     {
         List<Piloto> pilotos = pilotoServicio.findAllPilotos();
@@ -29,7 +29,7 @@ public class APIController {
 
     // GET de un piloto, devuelve un JSON del piloto
     @GetMapping("/piloto/{id}")
-    public ResponseEntity<Piloto> getProduct(@PathVariable long id) {
+    public ResponseEntity<Piloto> getProduct(@PathVariable String id) {
         Optional<Piloto> piloto = pilotoServicio.findById(id);
         return new ResponseEntity<>(piloto.get(), HttpStatus.OK);
     }
@@ -48,7 +48,7 @@ public class APIController {
 
     // PUT de un piloto, actualiza un piloto
     @PutMapping("/pilotos/{id}")
-    public ResponseEntity<Piloto> modifyProduct(@PathVariable long id, @RequestBody Piloto piloto) {
+    public ResponseEntity<Piloto> modifyProduct(@PathVariable String id, @RequestBody Piloto piloto) {
         this.pilotoServicio.savePiloto(piloto);
         // TODO Actualizar un nuevo pilot en la BB.DD. La información del nuevo piloto se encuentra en el objeto piloto
         // Para que llegue esta información en RESTED tenéis que poner en el body un JSON con la información del piloto a crear
@@ -57,7 +57,7 @@ public class APIController {
     }
 
     @DeleteMapping("/pilotos/{id}")
-    public ResponseEntity<Response> deleteProduct(@PathVariable long id) {
+    public ResponseEntity<Response> deleteProduct(@PathVariable String id) {
         // TODO Borrar un producto
         this.pilotoServicio.deletePiloto(id);
         return new ResponseEntity<>(HttpStatus.OK);
