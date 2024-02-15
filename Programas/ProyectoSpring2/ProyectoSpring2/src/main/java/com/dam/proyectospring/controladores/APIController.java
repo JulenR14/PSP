@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 @Controller
 public class APIController {
@@ -37,8 +38,9 @@ public class APIController {
     // POST de un piloto, crea un piloto
     @PostMapping("/pilotos")
     public ResponseEntity<Piloto> addProduct(@RequestBody Piloto piloto) {
-        if (piloto.getId() != null) {
-            return ResponseEntity.badRequest().build();
+
+        if (piloto.getId() == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         this.pilotoServicio.savePiloto(piloto);
         // TODO Crear un nuevo pilot en la BB.DD. La información del nuevo piloto se encuentra en el objeto piloto
