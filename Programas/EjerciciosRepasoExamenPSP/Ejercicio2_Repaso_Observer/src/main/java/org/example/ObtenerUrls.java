@@ -18,26 +18,17 @@ public class ObtenerUrls {
     Scanner sc = new Scanner(System.in);
     ObservableList<String> urls = FXCollections.observableArrayList();
 
-    Path directorioWebs = Paths.get("src/webs");
     /*
      * Metodo que pide al usuario que introduzca las urls de los archivos que quiere descargar
      */
     public void pedirUrls() {
-
-        if(Files.notExists(directorioWebs)){
-            try {
-                Files.createDirectory(directorioWebs);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
 
         //se añade el objeto dowloader a la lista de escuchadores de la lista de urls
         urls.addListener(dowloader);
         System.out.println("Si quieres terminar de ejecutar el programa escribe 'exit'");
         String url = "";
         do{
-            System.out.println("Introduce la url del archivo que quieres descargar : ");
+            System.out.print("Introduce la url del archivo que quieres descargar : ");
             url = sc.nextLine();
 
             if(!url.equalsIgnoreCase("exit")){
